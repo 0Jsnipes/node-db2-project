@@ -1,7 +1,12 @@
-const express = require("express")
+const express = require('express');
+const carsRouter = require('./cars/cars-router');
+const server = express();
 
-const server = express()
+server.use(express.json());
+server.use('/api/cars', carsRouter);
 
-// DO YOUR MAGIC
+server.use('*', (req, res) => {
+  res.status(404).json({ message: 'Not found' });
+});
 
-module.exports = server
+module.exports = server;
